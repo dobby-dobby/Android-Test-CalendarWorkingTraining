@@ -70,7 +70,7 @@ fun WorkoutScheduleScreen(viewModel: WorkoutViewModel = hiltViewModel()) {
                                 DayContainer(it, onWorkoutToggle = {
                                     viewModel.toggleWorkout(it)
                                 })
-                            };
+                            }
                         }
                     }
                 }

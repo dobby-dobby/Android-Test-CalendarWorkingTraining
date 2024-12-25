@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.time.DayOfWeek
 import java.time.LocalDate
-import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 
@@ -24,18 +23,13 @@ class WorkoutViewModel @Inject constructor(
     private val _workoutDays = MutableStateFlow<List<WorkoutDay>>(emptyList())
     val workoutDays: StateFlow<List<WorkoutDay>> = _workoutDays
 
-    private val _isLoading = MutableStateFlow(false)
-    val isLoading: StateFlow<Boolean> = _isLoading
-
     init {
         fetchWorkouts()
     }
 
     private fun fetchWorkouts() {
         viewModelScope.launch(Dispatchers.IO) {
-            _isLoading.value = true
             _workoutDays.value = repository.getWorkouts().dayData
-            _isLoading.value = false
         }
     }
 
@@ -59,7 +53,7 @@ class WorkoutViewModel @Inject constructor(
         }
     }
 
-    fun getCurrentWeek(): List<Pair<String, LocalDate,>> {
+    fun getCurrentWeek(): List<Pair<String, LocalDate>> {
         val startOfWeek = LocalDate.of(2024, 5, 20) .with(DayOfWeek.MONDAY)
         return (0..6).map { offset ->
             val date = startOfWeek.plusDays(offset.toLong())
