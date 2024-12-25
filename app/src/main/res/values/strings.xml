@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Calender Working Training</string>
+    <string name="title_activity_workout_schedule_screen">WorkoutScheduleScreen</string>
+</resources>
